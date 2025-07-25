@@ -39,12 +39,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body class="p-4 md:p-8">
-    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden">
-        <header class="bg-gradient-to-r from-blue-500 to-purple-600 p-6 text-white">
-            <h1 class="text-3xl font-bold text-center">แบบประเมิน CV 2025</h1>
-            <p class="text-center mt-2 text-blue-100">เลือกหัวข้อที่คุณต้องการทำแบบสอบถาม</p>
+
+    <!-- Language Selection Modal -->
+    <div id="language-modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-xl p-8 max-w-xs w-full text-center">
+            <h2 class="text-2xl font-bold mb-6">เลือกภาษา / Select Language</h2>
+            <button onclick="selectLanguage('th')" class="w-full mb-3 py-3 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold text-lg hover:from-blue-600 hover:to-purple-600 transition">ภาษาไทย</button>
+            <button onclick="selectLanguage('en')" class="w-full py-3 rounded-lg bg-gradient-to-r from-gray-200 to-gray-400 text-gray-800 font-semibold text-lg hover:from-gray-300 hover:to-gray-500 transition">English</button>
+        </div>
+    </div>
+
+    <!-- Thai Version -->
+    <div id="thai-content" class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden hidden">
+        <header class="bg-gradient-to-r from-blue-500 to-purple-600 p-6 text-white flex justify-between items-center">
+            <div class="flex-1">
+                <h1 class="text-3xl font-bold text-center">แบบประเมิน CV 2025</h1>
+                <p class="text-center mt-2 text-blue-100">เลือกหัวข้อที่คุณต้องการทำแบบสอบถาม</p>
+            </div>
+            <button onclick="backToLanguage()" class="ml-4 px-3 py-2 bg-white text-blue-700 rounded shadow hover:bg-blue-100 transition text-sm">เปลี่ยนภาษา</button>
         </header>
-        
         <main class="p-6">
             <div class="space-y-4">
                 <!-- หัวข้อที่ 1 -->
@@ -61,7 +74,6 @@
                         </div>
                     </div>
                 </a>
-
                 <!-- หัวข้อที่ 2 -->
                 <a href="https://forms.gle/JbHCjePmX4YwDUyy5" target="_blank" class="menu-item block bg-gradient-to-r from-purple-50 to-pink-50 p-5 rounded-lg border border-purple-100 hover:border-purple-300">
                     <div class="flex items-center justify-between">
@@ -76,7 +88,6 @@
                         </div>
                     </div>
                 </a>
-
                 <!-- หัวข้อที่ 3 พร้อมเมนูย่อย -->
                 <div class="menu-item bg-gradient-to-r from-green-50 to-teal-50 p-5 rounded-lg border border-green-100 hover:border-green-300">
                     <div class="flex items-center justify-between cursor-pointer" id="menu3-toggle">
@@ -90,7 +101,6 @@
                             </svg>
                         </div>
                     </div>
-
                     <!-- เมนูย่อยของหัวข้อที่ 3 -->
                     <div class="submenu mt-4 pl-4 border-l-2 border-green-200" id="submenu3">
                         <!-- ตัวเลือก 3.1 -->
@@ -107,7 +117,6 @@
                                 </div>
                             </div>
                         </a>
-
                         <!-- ตัวเลือก 3.2 พร้อมเมนูย่อยระดับที่ 2 -->
                         <div class="p-3 my-2 bg-white rounded-md shadow-sm">
                             <div class="flex items-center justify-between cursor-pointer" id="submenu3-2-toggle">
@@ -121,18 +130,17 @@
                                     </svg>
                                 </div>
                             </div>
-
                             <!-- เมนูย่อยของ 3.2 -->
                             <div class="nested-submenu mt-3 pl-3 border-l-2 border-blue-200" id="nested-submenu3-2">
-                                <a href="https://forms.gle/JbHCjePmX4YwDUyy5" target="_blank" class="block p-2 my-2 bg-blue-50 rounded hover:bg-blue-100 transition-colors">
+                                <a href="https://forms.gle/JbHCjePmX4YwDUyy5" class="block p-2 my-2 bg-blue-50 rounded hover:bg-blue-100 transition-colors">
                                     <div class="flex items-center justify-between">
-                                        <span class="text-blue-700">เทคโนโลยีสนับสนุนภารกิจการข่าวกรอง เฝ้าตรวจและลาดตะเวน : ISR </span>
+                                        <span class="text-blue-700">เทคโนโลยีสนับสนุนภารกิจการข่าวกรอง เฝ้าตรวจและลาดตะเวน : ISR</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                                         </svg>
                                     </div>
                                 </a>
-                                <a href="https://forms.gle/JbHCjePmX4YwDUyy5" target="_blank" class="block p-2 my-2 bg-blue-50 rounded hover:bg-blue-100 transition-colors">
+                                <a href="https://forms.gle/JbHCjePmX4YwDUyy5" class="block p-2 my-2 bg-blue-50 rounded hover:bg-blue-100 transition-colors">
                                     <div class="flex items-center justify-between">
                                         <span class="text-blue-700">ความมั่นคงปลอดภัยทางทะเล : MDA</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -140,7 +148,7 @@
                                         </svg>
                                     </div>
                                 </a>
-                                <a href="https://forms.gle/JbHCjePmX4YwDUyy5" target="_blank" class="block p-2 my-2 bg-blue-50 rounded hover:bg-blue-100 transition-colors">
+                                <a href="https://forms.gle/JbHCjePmX4YwDUyy5" class="block p-2 my-2 bg-blue-50 rounded hover:bg-blue-100 transition-colors">
                                     <div class="flex items-center justify-between">
                                         <span class="text-blue-700">การต่อต้านอากาศยานไร้คนขับ : C-UAS</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -148,7 +156,7 @@
                                         </svg>
                                     </div>
                                 </a>
-                                <a href="https://forms.gle/JbHCjePmX4YwDUyy5" target="_blank" class="block p-2 my-2 bg-blue-50 rounded hover:bg-blue-100 transition-colors">
+                                <a href="https://forms.gle/JbHCjePmX4YwDUyy5" class="block p-2 my-2 bg-blue-50 rounded hover:bg-blue-100 transition-colors">
                                     <div class="flex items-center justify-between">
                                         <span class="text-blue-700">การติดต่อสื่อสาร : COMM</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -156,7 +164,7 @@
                                         </svg>
                                     </div>
                                 </a>
-                                <a href="https://forms.gle/JbHCjePmX4YwDUyy5" target="_blank" class="block p-2 my-2 bg-blue-50 rounded hover:bg-blue-100 transition-colors">
+                                <a href="https://forms.gle/JbHCjePmX4YwDUyy5" class="block p-2 my-2 bg-blue-50 rounded hover:bg-blue-100 transition-colors">
                                     <div class="flex items-center justify-between">
                                         <span class="text-blue-700">การช่วยเหลือด้านมนุษย์ธรรมและการบรรเทาภัยพิบัติ : HA/DR</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -164,7 +172,7 @@
                                         </svg>
                                     </div>
                                 </a>
-                                <a href="https://forms.gle/JbHCjePmX4YwDUyy5" target="_blank" class="block p-2 my-2 bg-blue-50 rounded hover:bg-blue-100 transition-colors">
+                                <a href="https://forms.gle/JbHCjePmX4YwDUyy5" class="block p-2 my-2 bg-blue-50 rounded hover:bg-blue-100 transition-colors">
                                     <div class="flex items-center justify-between">
                                         <span class="text-blue-700">อากาศยานไร้คนขับ : UAV</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -178,32 +186,220 @@
                 </div>
             </div>
         </main>
-        
+        <footer class="bg-gray-50 p-4 text-center text-gray-500 text-sm border-t border-gray-100">
+            <p>© 2025 MRDC</p>
+        </footer>
+    </div>
+
+    <!-- English Version -->
+    <div id="english-content" class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden hidden">
+        <header class="bg-gradient-to-r from-blue-500 to-purple-600 p-6 text-white flex justify-between items-center">
+            <div class="flex-1">
+                <h1 class="text-3xl font-bold text-center">CV Evaluation 2025</h1>
+                <p class="text-center mt-2 text-blue-100">Select the topic you want to evaluate</p>
+            </div>
+            <button onclick="backToLanguage()" class="ml-4 px-3 py-2 bg-white text-blue-700 rounded shadow hover:bg-blue-100 transition text-sm">Change Language</button>
+        </header>
+        <main class="p-6">
+            <div class="space-y-4">
+                <!-- Topic 1 -->
+                <a href="https://forms.gle/JbHCjePmX4YwDUyy5" target="_blank" class="menu-item block bg-gradient-to-r from-blue-50 to-indigo-50 p-5 rounded-lg border border-blue-100 hover:border-blue-300">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-xl font-semibold text-blue-800">1.</h2>
+                            <p class="text-blue-600 mt-1">Click to go to the website</p>
+                        </div>
+                        <div class="text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+                <!-- Topic 2 -->
+                <a href="https://forms.gle/JbHCjePmX4YwDUyy5" target="_blank" class="menu-item block bg-gradient-to-r from-purple-50 to-pink-50 p-5 rounded-lg border border-purple-100 hover:border-purple-300">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-xl font-semibold text-purple-800">2.</h2>
+                            <p class="text-purple-600 mt-1">Click to go to the website</p>
+                        </div>
+                        <div class="text-purple-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+                <!-- Topic 3 with submenu -->
+                <div class="menu-item bg-gradient-to-r from-green-50 to-teal-50 p-5 rounded-lg border border-green-100 hover:border-green-300">
+                    <div class="flex items-center justify-between cursor-pointer" id="menu3-toggle-en">
+                        <div>
+                            <h2 class="text-xl font-semibold text-green-800">3.</h2>
+                            <p class="text-green-600 mt-1">Click to see options</p>
+                        </div>
+                        <div class="text-green-500 transform transition-transform" id="menu3-arrow-en">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- Submenu for topic 3 -->
+                    <div class="submenu mt-4 pl-4 border-l-2 border-green-200" id="submenu3-en">
+                        <!-- 3.1 -->
+                        <a href="https://forms.gle/JbHCjePmX4YwDUyy5" class="block p-3 my-2 bg-white rounded-md shadow-sm hover:bg-green-50 transition-colors">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="font-medium text-green-700">3.1</h3>
+                                    <p class="text-sm text-green-600">Click to go to the website (TH)</p>
+                                </div>
+                                <div class="text-green-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </a>
+                        <!-- 3.2 with nested submenu -->
+                        <div class="p-3 my-2 bg-white rounded-md shadow-sm">
+                            <div class="flex items-center justify-between cursor-pointer" id="submenu3-2-toggle-en">
+                                <div>
+                                    <h3 class="font-medium text-blue-700">3.2</h3>
+                                    <p class="text-sm text-blue-600">Click to see more options</p>
+                                </div>
+                                <div class="text-blue-500 transform transition-transform" id="submenu3-2-arrow-en">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <!-- Nested submenu for 3.2 -->
+                            <div class="nested-submenu mt-3 pl-3 border-l-2 border-blue-200" id="nested-submenu3-2-en">
+                                <a href="https://forms.gle/JbHCjePmX4YwDUyy5" class="block p-2 my-2 bg-blue-50 rounded hover:bg-blue-100 transition-colors">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-blue-700">3.2.1</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                        </svg>
+                                    </div>
+                                </a>
+                                <a href="https://forms.gle/JbHCjePmX4YwDUyy5" class="block p-2 my-2 bg-blue-50 rounded hover:bg-blue-100 transition-colors">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-blue-700">3.2.2</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                        </svg>
+                                    </div>
+                                </a>
+                                <a href="https://forms.gle/JbHCjePmX4YwDUyy5" class="block p-2 my-2 bg-blue-50 rounded hover:bg-blue-100 transition-colors">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-blue-700">3.2.3</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                        </svg>
+                                    </div>
+                                </a>
+                                <a href="https://forms.gle/JbHCjePmX4YwDUyy5" class="block p-2 my-2 bg-blue-50 rounded hover:bg-blue-100 transition-colors">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-blue-700">3.2.4</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                        </svg>
+                                    </div>
+                                </a>
+                                <a href="https://forms.gle/JbHCjePmX4YwDUyy5" class="block p-2 my-2 bg-blue-50 rounded hover:bg-blue-100 transition-colors">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-blue-700">3.2.5</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                        </svg>
+                                    </div>
+                                </a>
+                                <a href="https://forms.gle/JbHCjePmX4YwDUyy5" class="block p-2 my-2 bg-blue-50 rounded hover:bg-blue-100 transition-colors">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-blue-700">3.2.6</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                        </svg>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
         <footer class="bg-gray-50 p-4 text-center text-gray-500 text-sm border-t border-gray-100">
             <p>© 2025 MRDC</p>
         </footer>
     </div>
 
     <script>
-        // สำหรับเมนูย่อยหัวข้อที่ 3
-        const menu3Toggle = document.getElementById('menu3-toggle');
-        const submenu3 = document.getElementById('submenu3');
-        const menu3Arrow = document.getElementById('menu3-arrow');
-        
-        menu3Toggle.addEventListener('click', () => {
-            submenu3.classList.toggle('active');
-            menu3Arrow.classList.toggle('rotate-180');
+        // ให้ modal แสดงเสมอเมื่อโหลด
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('language-modal').style.display = 'flex';
+            document.getElementById('thai-content').classList.add('hidden');
+            document.getElementById('english-content').classList.add('hidden');
         });
-        
-        // สำหรับเมนูย่อยของ 3.2
-        const submenu32Toggle = document.getElementById('submenu3-2-toggle');
-        const nestedSubmenu32 = document.getElementById('nested-submenu3-2');
-        const submenu32Arrow = document.getElementById('submenu3-2-arrow');
-        
-        submenu32Toggle.addEventListener('click', () => {
-            nestedSubmenu32.classList.toggle('active');
-            submenu32Arrow.classList.toggle('rotate-180');
+
+        // เลือกภาษา
+        function selectLanguage(lang) {
+            document.getElementById('language-modal').style.display = 'none';
+            document.getElementById('thai-content').classList.add('hidden');
+            document.getElementById('english-content').classList.add('hidden');
+            if (lang === 'th') {
+                document.getElementById('thai-content').classList.remove('hidden');
+            } else {
+                document.getElementById('english-content').classList.remove('hidden');
+            }
+        }
+        // กลับไปเลือกภาษาใหม่
+        function backToLanguage() {
+            document.getElementById('thai-content').classList.add('hidden');
+            document.getElementById('english-content').classList.add('hidden');
+            document.getElementById('language-modal').style.display = 'flex';
+        }
+
+        // เมนูย่อยไทย
+        document.addEventListener('DOMContentLoaded', function() {
+            // ไทย
+            const menu3Toggle = document.getElementById('menu3-toggle');
+            const submenu3 = document.getElementById('submenu3');
+            const menu3Arrow = document.getElementById('menu3-arrow');
+            if(menu3Toggle){
+                menu3Toggle.addEventListener('click', () => {
+                    submenu3.classList.toggle('active');
+                    menu3Arrow.classList.toggle('rotate-180');
+                });
+            }
+            const submenu32Toggle = document.getElementById('submenu3-2-toggle');
+            const nestedSubmenu32 = document.getElementById('nested-submenu3-2');
+            const submenu32Arrow = document.getElementById('submenu3-2-arrow');
+            if(submenu32Toggle){
+                submenu32Toggle.addEventListener('click', () => {
+                    nestedSubmenu32.classList.toggle('active');
+                    submenu32Arrow.classList.toggle('rotate-180');
+                });
+            }
+            // อังกฤษ
+            const menu3ToggleEn = document.getElementById('menu3-toggle-en');
+            const submenu3En = document.getElementById('submenu3-en');
+            const menu3ArrowEn = document.getElementById('menu3-arrow-en');
+            if(menu3ToggleEn){
+                menu3ToggleEn.addEventListener('click', () => {
+                    submenu3En.classList.toggle('active');
+                    menu3ArrowEn.classList.toggle('rotate-180');
+                });
+            }
+            const submenu32ToggleEn = document.getElementById('submenu3-2-toggle-en');
+            const nestedSubmenu32En = document.getElementById('nested-submenu3-2-en');
+            const submenu32ArrowEn = document.getElementById('submenu3-2-arrow-en');
+            if(submenu32ToggleEn){
+                submenu32ToggleEn.addEventListener('click', () => {
+                    nestedSubmenu32En.classList.toggle('active');
+                    submenu32ArrowEn.classList.toggle('rotate-180');
+                });
+            }
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9648392274124b59',t:'MTc1MzQxMDQ5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
