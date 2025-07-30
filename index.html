@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crimson Viper 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Sarabun:wght@300;400;500;700&display=swap');
+        
+        :root {
+            --primary-color: #00ffcc;
+            --secondary-color: #0066ff;
+            --bg-color: #041428;
+            --crimson-color: #DC143C;
+            --glow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
+        }
+        
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 102, 255, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 204, 0.1) 0%, transparent 20%),
+                linear-gradient(rgba(4, 20, 40, 0.9), rgba(4, 20, 40, 0.9)),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230066ff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .thai-font {
+            font-family: 'Sarabun', sans-serif;
+        }
+        
+        .hologram-container {
+            position: relative;
+            perspective: 1000px;
+        }
+        
+        .hologram-button {
+            background: rgba(0, 102, 255, 0.1);
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            text-shadow: 0 0 5px var(--primary-color);
+            box-shadow: inset 0 0 10px rgba(0, 255, 204, 0.3), 0 0 10px rgba(0, 255, 204, 0.2);
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hologram-button:before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 1px solid var(--primary-color);
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .hologram-button:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 204, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .hologram-button:hover {
+            box-shadow: inset 0 0 15px rgba(0, 255, 204, 0.5), 0 0 15px rgba(0, 255, 204, 0.3);
+            text-shadow: 0 0 8px var(--primary-color);
+            transform: translateZ(10px);
+        }
+        
+        .hologram-button:hover:before {
+            opacity: 0.5;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+        }
+        
+        .hologram-button:hover:after {
+            left: 100%;
+        }
+        
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        
+        .submenu.active {
+            max-height: 1000px;
+        }
+        
+        .submenu-item {
+            transform: translateX(-20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .submenu.active .submenu-item {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        .submenu.active .submenu-item:nth-child(1) { transition-delay: 0.1s; }
+        .submenu.active .submenu-item:nth-child(2) { transition-delay: 0.2s; }
+        
+        .sub-submenu {
+            max-height: 0;
+            overflow-y: auto;
+            transition: max-height 0.5s ease;
+        }
+        
+        .sub-submenu.active {
+            max-height: 500px;
+        }
+        
+        .sub-submenu-item {
+            transform: translateY(-10px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .sub-submenu.active .sub-submenu-item {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .sub-submenu.active .sub-submenu-item:nth-child(1) { transition-delay: 0.1s; }
+        .sub-submenu.active .sub-submenu-item:nth-child(2) { transition-delay: 0.15s; }
+        .sub-submenu.active .sub-submenu-item:nth-child(3) { transition-delay: 0.2s; }
+        .sub-submenu.active .sub-submenu-item:nth-child(4) { transition-delay: 0.25s; }
+        .sub-submenu.active .sub-submenu-item:nth-child(5) { transition-delay: 0.3s; }
+        .sub-submenu.active .sub-submenu-item:nth-child(6) { transition-delay: 0.35s; }
+        
+        .hexagon {
+            position: absolute;
+            width: 100px;
+            height: 110px;
+            background: rgba(0, 255, 204, 0.05);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            z-index: -1;
+            animation: float 10s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        .scan-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            z-index: 1000;
+            opacity: 0.5;
+            animation: scan 4s linear infinite;
+        }
+        
+        @keyframes scan {
+            0% { top: -5px; }
+            100% { top: 100vh; }
+        }
+        
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(0, 102, 255, 0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0, 102, 255, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: -2;
+        }
+        
+        .corner-decoration {
+            position: fixed;
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--primary-color);
+            opacity: 0.5;
+        }
+        
+        .corner-decoration.top-left {
+            top: 20px;
+            left: 20px;
+            border-right: none;
+            border-bottom: none;
+        }
+        
+        .corner-decoration.top-right {
+            top: 20px;
+            right: 20px;
+            border-left: none;
+            border-bottom: none;
+        }
+        
+        .corner-decoration.bottom-left {
+            bottom: 20px;
+            left: 20px;
+            border-right: none;
+            border-top: none;
+        }
+        
+        .corner-decoration.bottom-right {
+            bottom: 20px;
+            right: 20px;
+            border-left: none;
+            border-top: none;
+        }
+        
+        /* Scrollbar styling */
+        .sub-submenu::-webkit-scrollbar {
+            width: 5px;
+        }
+        
+        .sub-submenu::-webkit-scrollbar-track {
+            background: rgba(0, 102, 255, 0.1);
+        }
+        
+        .sub-submenu::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+        
+        /* Language selection page */
+        .language-selection {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        
+        .language-button {
+            width: 180px;
+            height: 180px;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background: rgba(0, 102, 255, 0.1);
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            text-shadow: 0 0 5px var(--primary-color);
+            box-shadow: inset 0 0 20px rgba(0, 255, 204, 0.3), 0 0 20px rgba(0, 255, 204, 0.2);
+            transition: all 0.5s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @media (max-width: 640px) {
+            .language-button {
+                width: 130px;
+                height: 130px;
+                margin: 10px;
+            }
+            
+            .corner-decoration {
+                width: 50px;
+                height: 50px;
+            }
+        }
+        
+        .language-button:before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+        
+        .language-button:hover {
+            transform: scale(1.05);
+            box-shadow: inset 0 0 30px rgba(0, 255, 204, 0.5), 0 0 30px rgba(0, 255, 204, 0.3);
+        }
+        
+        .language-button:hover:before {
+            opacity: 0.5;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+        }
+        
+        .language-flag {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .language-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .language-native {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 255, 204, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 20px rgba(0, 255, 204, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 255, 204, 0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .main-content {
+            display: none;
+        }
+        
+        /* Crimson Viper specific styling */
+        .crimson-text {
+            color: var(--crimson-color);
+            text-shadow: 0 0 5px rgba(220, 20, 60, 0.7);
+        }
+        
+        .crimson-glow {
+            box-shadow: inset 0 0 10px rgba(220, 20, 60, 0.3), 0 0 10px rgba(220, 20, 60, 0.2);
+        }
+        
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+            .hologram-button {
+                padding: 0.75rem !important;
+            }
+            
+            .submenu {
+                padding-left: 1rem !important;
+                padding-right: 0.5rem !important;
+            }
+            
+            .sub-submenu {
+                padding-left: 0.5rem !important;
+                padding-right: 0.25rem !important;
+            }
+            
+            h1 {
+                font-size: 1.75rem !important;
+            }
+            
+            h2 {
+                font-size: 1.25rem !important;
+            }
+            
+            .text-xs {
+                font-size: 0.65rem !important;
+            }
+        }
+    </style>
+</head>
+<body class="text-white">
+    <div class="scan-line"></div>
+    <div class="grid-bg"></div>
+    
+    <div class="corner-decoration top-left"></div>
+    <div class="corner-decoration top-right"></div>
+    <div class="corner-decoration bottom-left"></div>
+    <div class="corner-decoration bottom-right"></div>
+    
+    <!-- Floating hexagons -->
+    <div class="hexagon" style="top: 10%; left: 5%; opacity: 0.3; animation-delay: 0s;"></div>
+    <div class="hexagon" style="top: 30%; right: 10%; opacity: 0.2; animation-delay: 2s;"></div>
+    <div class="hexagon" style="bottom: 20%; left: 15%; opacity: 0.15; animation-delay: 4s;"></div>
+    <div class="hexagon" style="bottom: 40%; right: 20%; opacity: 0.25; animation-delay: 6s;"></div>
+    
+    <!-- Language Selection Page -->
+    <div id="language-selection" class="language-selection fade-in">
+        <h1 class="text-3xl md:text-5xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-blue-500">
+            CRIMSON VIPER 2025
+        </h1>
+        
+        <div class="flex flex-wrap justify-center">
+            <div class="language-button pulse" onclick="selectLanguage('en')">
+                <div class="language-flag">EN</div>
+                <div class="language-name">ENGLISH</div>
+            </div>  
+            
+            <div class="language-button pulse thai-font" onclick="selectLanguage('th')">
+                <div class="language-flag">TH</div>
+                <div class="language-name">ภาษาไทย</div>
+            </div>
+        </div>
+        
+        <div class="mt-16 text-sm text-cyan-400 opacity-70">
+            <p>CRIMSON VIPER EVALUATION SYSTEM</p>
+            <p>INITIALIZING...</p>
+        </div>
+    </div>
+    
+    <!-- Main Content - English -->
+    <div id="main-content-en" class="main-content">
+        <div class="container mx-auto px-4 py-8 md:py-16 max-w-3xl">
+            <div class="text-center mb-8 md:mb-12">
+                <h1 class="text-3xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-blue-500">
+                    CRIMSON VIPER EVALUATION 2025
+                </h1>
+                <div class="h-1 w-32 bg-gradient-to-r from-red-500 to-blue-500 mx-auto"></div>
+            </div>
+            
+            <div class="hologram-container space-y-4 md:space-y-6">
+                <!-- Menu Item 1 -->
+                <div class="transform transition-all duration-300 hover:scale-105">
+                    <a href="https://forms.gle/7MM1ifLQBskn7s5S6" class="hologram-button flex items-center justify-between p-3 md:p-5 rounded-lg w-full">
+                        <div class="flex items-center">
+                            <div class="mr-3 md:mr-4 text-xl md:text-2xl">01</div>
+                            <div>
+                                <h2 class="text-lg md:text-xl font-semibold">EVENT EVALUATION FORM FOR CV25</h2>
+                                <p class="text-xs md:text-sm opacity-70">Click to go to the website</p>
+                            </div>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </a>
+                </div>
+                
+                <!-- Menu Item 2 -->
+                <div class="transform transition-all duration-300 hover:scale-105">
+                    <a href="https://forms.gle/1igotpe7HmSPa39b9" class="hologram-button flex items-center justify-between p-3 md:p-5 rounded-lg w-full">
+                        <div class="flex items-center">
+                            <div class="mr-3 md:mr-4 text-xl md:text-2xl">02</div>
+                            <div>
+                                <h2 class="text-lg md:text-xl font-semibold">SURVEY FORM FOR LECTURES OR SEMINARS IN CV25</h2>
+                                <p class="text-xs md:text-sm opacity-70">Click to go to the website</p>
+                            </div>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </a>
+                </div>
+                
+                <!-- Menu Item 3 with Submenu -->
+                <div>
+                    <button id="menu3-en" class="hologram-button flex items-center justify-between p-3 md:p-5 rounded-lg w-full">
+                        <div class="flex items-center">
+                            <div class="mr-3 md:mr-4 text-xl md:text-2xl">03</div>
+                            <div>
+                                <h2 class="text-lg md:text-xl font-semibold">TECHNOLOGY ASSESSMENT</h2>
+                                <p class="text-xs md:text-sm opacity-70 text-left">Click to see options</p>
+                            </div>
+                        </div>
+                        <svg id="menu3Icon-en" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    
+                    <!-- Submenu for Item 3 -->
+                    <div id="submenu3-en" class="submenu pl-6 md:pl-10 pr-2 md:pr-4">
+                        <div class="space-y-3 md:space-y-4 py-3 md:py-4">
+                            <!-- Submenu Item 3.1 -->
+                            <div class="submenu-item transform transition-all duration-300 hover:scale-105">
+                                <a href="https://forms.gle/smauXLruMaSBagR7A" class="hologram-button flex items-center justify-between p-3 md:p-4 rounded-lg w-full">
+                                    <div class="flex items-center">
+                                        <div class="mr-2 md:mr-3 text-base md:text-lg">3.1</div>
+                                        <div>
+                                            <h3 class="text-base md:text-lg font-medium">THAI TECHNOLOGY</h3>
+                                            <p class="text-xs opacity-70">Click to go to the website</p>
+                                        </div>
+                                    </div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                    </svg>
+                                </a>
+                            </div>
+                            
+                            <!-- Submenu Item 3.2 with Sub-submenu -->
+                            <div class="submenu-item">
+                                <button id="submenu3-2-en" class="hologram-button flex items-center justify-between p-3 md:p-4 rounded-lg w-full">
+                                    <div class="flex items-center">
+                                        <div class="mr-2 md:mr-3 text-base md:text-lg">3.2</div>
+                                        <div>
+                                            <h3 class="text-base md:text-lg font-medium">U.S.A. TECHNOLOGY</h3>
+                                            <p class="text-xs opacity-70 text-left">Click to see options</p>
+                                        </div>
+                                    </div>
+                                    <svg id="submenu3-2Icon-en" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                                
+                                <!-- Sub-submenu for Item 3.2 -->
+                                <div id="subSubmenu3-2-en" class="sub-submenu pl-4 md:pl-8 pr-1 md:pr-2">
+                                    <div class="space-y-2 md:space-y-3 py-2 md:py-3">
+                                        <!-- 6 Sub-submenu Items -->
+                                        <div class="sub-submenu-item">
+                                            <a href="https://forms.gle/XGhfZyQA1aik7Rvs6" class="hologram-button flex items-center justify-between p-2 md:p-3 rounded-lg w-full">
+                                                <div class="flex items-center">
+                                                    <div class="mr-2 text-sm">ISR</div>
+                                                    <p class="text-xs opacity-70">Intelligence, Surveillance, and Reconnaissance</p>
+                                                </div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 md:h-4 md:w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        
+                                        <div class="sub-submenu-item">
+                                            <a href="https://forms.gle/jUR1QUA1FMGDbhy2A" class="hologram-button flex items-center justify-between p-2 md:p-3 rounded-lg w-full">
+                                                <div class="flex items-center">
+                                                    <div class="mr-2 text-sm">MDA</div>
+                                                    <p class="text-xs opacity-70">Maritime Domain Awareness Technologies</p>
+                                                </div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 md:h-4 md:w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        
+                                        <div class="sub-submenu-item">
+                                            <a href="https://forms.gle/ZSxCrfBswsDfPpUh9" class="hologram-button flex items-center justify-between p-2 md:p-3 rounded-lg w-full">
+                                                <div class="flex items-center">
+                                                    <div class="mr-2 text-sm">C-UAS</div>
+                                                    <p class="text-xs opacity-70">Counter-Unmanned Aircraft Systems</p>
+                                                </div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 md:h-4 md:w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        
+                                        <div class="sub-submenu-item">
+                                            <a href="https://forms.gle/BnSHvqoEa5zZBVv5A" class="hologram-button flex items-center justify-between p-2 md:p-3 rounded-lg w-full">
+                                                <div class="flex items-center">
+                                                    <div class="mr-2 text-sm">COMM</div>
+                                                    <p class="text-xs opacity-70">Military Communications</p>
+                                                </div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 md:h-4 md:w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        
+                                        <div class="sub-submenu-item">
+                                            <a href="https://forms.gle/BP9nhsriM1NR41JE9" class="hologram-button flex items-center justify-between p-2 md:p-3 rounded-lg w-full">
+                                                <div class="flex items-center">
+                                                    <div class="mr-2 text-sm">HADR</div>
+                                                    <p class="text-xs opacity-70">Humanitarian Assistance and Disaster Relief</p>
+                                                </div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 md:h-4 md:w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        
+                                        <div class="sub-submenu-item">
+                                            <a href="https://forms.gle/BLF4tvT5tL1npJ1s5" class="hologram-button flex items-center justify-between p-2 md:p-3 rounded-lg w-full">
+                                                <div class="flex items-center">
+                                                    <div class="mr-2 text-sm">UAV</div>
+                                                    <p class="text-xs opacity-70">Unmanned Aerial Vehicle</p>
+                                                </div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 md:h-4 md:w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-8 md:mt-16 text-sm text-cyan-400 opacity-70">
+                <p>Crimson Viper 2025 Evaluation System</p>
+                <p>Military Research and Development Centre</p>
+                <button onclick="showLanguageSelection()" class="mt-4 hologram-button px-4 py-2 rounded-lg">
+                    <span class="flex items-center justify-center">
+                        <span class="mr-2">🌐</span> CHANGE LANGUAGE
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content - Thai -->
+    <div id="main-content-th" class="main-content thai-font">
+        <div class="container mx-auto px-4 py-8 md:py-16 max-w-3xl">
+            <div class="text-center mb-8 md:mb-12">
+                <h1 class="text-3xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-blue-500">
+                    แบบประเมิน Crimson Viper 2025
+                </h1>
+                <div class="h-1 w-32 bg-gradient-to-r from-red-500 to-blue-500 mx-auto"></div>
+            </div>
+            
+            <div class="hologram-container space-y-4 md:space-y-6">
+                <!-- Menu Item 1 -->
+                <div class="transform transition-all duration-300 hover:scale-105">
+                    <a href="https://forms.gle/LxfpWLN1fnZtcLbk8" class="hologram-button flex items-center justify-between p-3 md:p-5 rounded-lg w-full">
+                        <div class="flex items-center">
+                            <div class="mr-3 md:mr-4 text-xl md:text-2xl">01</div>
+                            <div>
+                                <h2 class="text-lg md:text-xl font-semibold">การประเมินการจัดงาน/การสาธิต</h2>
+                                <p class="text-xs md:text-sm opacity-70">คลิกเพื่อไปยังเว็บไซต์</p>
+                            </div>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </a>
+                </div>
+                
+                <!-- Menu Item 2 -->
+                <div class="transform transition-all duration-300 hover:scale-105">
+                    <a href="https://forms.gle/2iwHLRyEmK9aBLe3A" target="_blank" class="hologram-button flex items-center justify-between p-3 md:p-5 rounded-lg w-full">
+                        <div class="flex items-center">
+                            <div class="mr-3 md:mr-4 text-xl md:text-2xl">02</div>
+                            <div>
+                                <h2 class="text-lg md:text-xl font-semibold">การประเมินการบรรยาย</h2>
+                                <p class="text-xs md:text-sm opacity-70">คลิกเพื่อไปยังเว็บไซต์</p>
+                            </div>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </a>
+                </div>
+                
+                <!-- Menu Item 3 with Submenu -->
+                <div>
+                    <button id="menu3-th" class="hologram-button flex items-center justify-between p-3 md:p-5 rounded-lg w-full">
+                        <div class="flex items-center">
+                            <div class="mr-3 md:mr-4 text-xl md:text-2xl">03</div>
+                            <div>
+                                <h2 class="text-lg md:text-xl font-semibold">การประเมินเทคโนโลยี</h2>
+                                <p class="text-xs md:text-sm opacity-70 text-left">คลิกเพื่อดูตัวเลือก</p>
+                            </div>
+                        </div>
+                        <svg id="menu3Icon-th" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    
+                    <!-- Submenu for Item 3 -->
+                    <div id="submenu3-th" class="submenu pl-6 md:pl-10 pr-2 md:pr-4">
+                        <div class="space-y-3 md:space-y-4 py-3 md:py-4">
+                            <!-- Submenu Item 3.1 -->
+                            <div class="submenu-item transform transition-all duration-300 hover:scale-105">
+                                <a href="https://forms.gle/bJQP55X6eQP4mCwd8" class="hologram-button flex items-center justify-between p-3 md:p-4 rounded-lg w-full">
+                                    <div class="flex items-center">
+                                        <div class="mr-2 md:mr-3 text-base md:text-lg">3.1</div>
+                                        <div>
+                                            <h3 class="text-base md:text-lg font-medium">เทคโนโลยีฝ่ายไทย</h3>
+                                            <p class="text-xs opacity-70">คลิกเพื่อไปยังเว็บไซต์</p>
+                                        </div>
+                                    </div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                    </svg>
+                                </a>
+                            </div>
+                            
+                            <!-- Submenu Item 3.2 with Sub-submenu -->
+                            <div class="submenu-item">
+                                <button id="submenu3-2-th" class="hologram-button flex items-center justify-between p-3 md:p-4 rounded-lg w-full">
+                                    <div class="flex items-center">
+                                        <div class="mr-2 md:mr-3 text-base md:text-lg">3.2</div>
+                                        <div>
+                                            <h3 class="text-base md:text-lg font-medium">เทคโนโลยีฝ่าย US</h3>
+                                            <p class="text-xs opacity-70 text-left">คลิกเพื่อดูตัวเลือก</p>
+                                        </div>
+                                    </div>
+                                    <svg id="submenu3-2Icon-th" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                                
+                                <!-- Sub-submenu for Item 3.2 -->
+                                <div id="subSubmenu3-2-th" class="sub-submenu pl-4 md:pl-8 pr-1 md:pr-2">
+                                    <div class="space-y-2 md:space-y-3 py-2 md:py-3">
+                                        <!-- 6 Sub-submenu Items -->
+                                        <div class="sub-submenu-item">
+                                            <a href="https://forms.gle/UescNxgbcs7wEjaBA" class="hologram-button flex items-center justify-between p-2 md:p-3 rounded-lg w-full">
+                                                <div class="flex items-center">
+                                                    <div class="mr-2 text-sm">ISR</div>
+                                                    <p class="text-xs opacity-70">เทคโนโลยีสนับสนุนภารกิจการข่าวกรอง เฝ้าตรวจและลาดตะเวน</p>
+                                                </div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 md:h-4 md:w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        
+                                        <div class="sub-submenu-item">
+                                            <a href="https://forms.gle/qeSBRYtD97QFLbFB7" class="hologram-button flex items-center justify-between p-2 md:p-3 rounded-lg w-full">
+                                                <div class="flex items-center">
+                                                    <div class="mr-2 text-sm">MDA</div>
+                                                    <p class="text-xs opacity-70">ความมั่นคงปลอดภัยทางทะเล</p>
+                                                </div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 md:h-4 md:w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        
+                                        <div class="sub-submenu-item">
+                                            <a href="https://forms.gle/ahUdPWZaUawoaGvb7" class="hologram-button flex items-center justify-between p-2 md:p-3 rounded-lg w-full">
+                                                <div class="flex items-center">
+                                                    <div class="mr-2 text-sm">C-UAS</div>
+                                                    <p class="text-xs opacity-70">การต่อต้านอากาศยานไร้คนขับ</p>
+                                                </div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 md:h-4 md:w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        
+                                        <div class="sub-submenu-item">
+                                            <a href="https://forms.gle/pQVZDdhQRcsmknrB7" class="hologram-button flex items-center justify-between p-2 md:p-3 rounded-lg w-full">
+                                                <div class="flex items-center">
+                                                    <div class="mr-2 text-sm">COMM</div>
+                                                    <p class="text-xs opacity-70">การติดต่อสื่อสาร</p>
+                                                </div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 md:h-4 md:w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        
+                                        <div class="sub-submenu-item">
+                                            <a href="https://forms.gle/6tqhdNXo44fgnvn96" class="hologram-button flex items-center justify-between p-2 md:p-3 rounded-lg w-full">
+                                                <div class="flex items-center">
+                                                    <div class="mr-2 text-sm">HA/DR</div>
+                                                    <p class="text-xs opacity-70">การช่วยเหลือด้านมนุษย์ธรรมและการบรรเทาภัยพิบัติ</p>
+                                                </div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 md:h-4 md:w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        
+                                        <div class="sub-submenu-item">
+                                            <a href="https://forms.gle/J16FB56jQ2XHAS747" class="hologram-button flex items-center justify-between p-2 md:p-3 rounded-lg w-full">
+                                                <div class="flex items-center">
+                                                    <div class="mr-2 text-sm">UAV</div>
+                                                    <p class="text-xs opacity-70">อากาศยานไร้คนขับ</p>
+                                                </div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 md:h-4 md:w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-8 md:mt-16 text-sm text-cyan-400 opacity-70">
+                <p>ระบบประเมิน Crimson Viper 2025</p>
+                <p>ศูนย์วิจัยและพัฒนาการทหาร</p>
+                <button onclick="showLanguageSelection()" class="mt-4 hologram-button px-4 py-2 rounded-lg">
+                    <span class="flex items-center justify-center">
+                        <span class="mr-2">🌐</span> เปลี่ยนภาษา
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Language selection
+        function selectLanguage(lang) {
+            document.getElementById('language-selection').style.display = 'none';
+            
+            if (lang === 'en') {
+                document.getElementById('main-content-en').style.display = 'block';
+                document.getElementById('main-content-th').style.display = 'none';
+            } else {
+                document.getElementById('main-content-en').style.display = 'none';
+                document.getElementById('main-content-th').style.display = 'block';
+            }
+            
+            // Add fade-in effect
+            document.getElementById('main-content-' + lang).classList.add('fade-in');
+        }
+        
+        function showLanguageSelection() {
+            document.getElementById('main-content-en').style.display = 'none';
+            document.getElementById('main-content-th').style.display = 'none';
+            document.getElementById('language-selection').style.display = 'flex';
+        }
+        
+        // Menu toggle functionality - English
+        document.getElementById('menu3-en').addEventListener('click', function() {
+            const submenu = document.getElementById('submenu3-en');
+            const icon = document.getElementById('menu3Icon-en');
+            submenu.classList.toggle('active');
+            icon.classList.toggle('rotate-180');
+        });
+        
+        document.getElementById('submenu3-2-en').addEventListener('click', function() {
+            const subSubmenu = document.getElementById('subSubmenu3-2-en');
+            const icon = document.getElementById('submenu3-2Icon-en');
+            subSubmenu.classList.toggle('active');
+            icon.classList.toggle('rotate-180');
+        });
+        
+        // Menu toggle functionality - Thai
+        document.getElementById('menu3-th').addEventListener('click', function() {
+            const submenu = document.getElementById('submenu3-th');
+            const icon = document.getElementById('menu3Icon-th');
+            submenu.classList.toggle('active');
+            icon.classList.toggle('rotate-180');
+        });
+        
+        document.getElementById('submenu3-2-th').addEventListener('click', function() {
+            const subSubmenu = document.getElementById('subSubmenu3-2-th');
+            const icon = document.getElementById('submenu3-2Icon-th');
+            subSubmenu.classList.toggle('active');
+            icon.classList.toggle('rotate-180');
+        });
+        
+        // Add floating effect to buttons on desktop only
+        if (window.innerWidth > 768) {
+            document.querySelectorAll('.hologram-button').forEach(button => {
+                button.addEventListener('mousemove', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const angleX = (y - centerY) / 20;
+                    const angleY = (centerX - x) / 20;
+                    
+                    this.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateZ(10px)`;
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+                });
+            });
+        }
+        
+        // Check for mobile devices and adjust styling
+        function checkMobile() {
+            if (window.innerWidth <= 768) {
+                document.querySelectorAll('.corner-decoration').forEach(corner => {
+                    corner.style.width = '50px';
+                    corner.style.height = '50px';
+                });
+            } else {
+                document.querySelectorAll('.corner-decoration').forEach(corner => {
+                    corner.style.width = '80px';
+                    corner.style.height = '80px';
+                });
+            }
+        }
+        
+        // Run on load and resize
+        window.addEventListener('load', checkMobile);
+        window.addEventListener('resize', checkMobile);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'967200946688895d',t:'MTc1Mzg0ODU4NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
